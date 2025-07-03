@@ -1,0 +1,58 @@
+INICIAR programa
+
+REPETIR
+    MOSTRAR "Calculadora básica (escribe 'salir' para terminar)"
+
+    MOSTRAR "Ingresa el primer número:"
+    LEER entrada1
+
+    SI entrada1 ES "salir"
+        TERMINAR programa
+
+    SI NO ES número válido (TryParse entrada1 A numero1)
+        MOSTRAR "Entrada inválida. Intenta de nuevo."
+        CONTINUAR al inicio del bucle
+
+    MOSTRAR "Ingresa el operador (+, -, *, /):"
+    LEER operador
+
+    MOSTRAR "Ingresa el segundo número:"
+    LEER entrada2
+
+    SI entrada2 ES "salir"
+        TERMINAR programa
+
+    SI NO ES número válido (TryParse entrada2 A numero2)
+        MOSTRAR "Entrada inválida. Intenta de nuevo."
+        CONTINUAR al inicio del bucle
+
+    DECLARAR resultado COMO float
+
+    SI operador ES "+"
+        resultado = numero1 + numero2
+    SINO SI operador ES "-"
+        resultado = numero1 - numero2
+    SINO SI operador ES "*"
+        resultado = numero1 * numero2
+    SINO SI operador ES "/"
+        SI numero2 == 0
+            MOSTRAR "Error: No se puede dividir entre cero."
+            CONTINUAR al inicio del bucle
+        FIN SI
+        resultado = numero1 / numero2
+    SINO
+        MOSTRAR "Operador inválido."
+        CONTINUAR al inicio del bucle
+    FIN SI
+
+    SI resultado ES NaN (IsNaN)
+        MOSTRAR "Error: El resultado no es un número válido."
+    SINO SI resultado ES infinito (IsInfinity)
+        MOSTRAR "Error: Resultado infinito (división inválida)."
+    SINO
+        MOSTRAR "Resultado: " + resultado.ToString()
+    FIN SI
+
+HASTA QUE el usuario escriba "salir"
+
+TERMINAR programa
